@@ -22,7 +22,7 @@ function calculatePi(iterations) {
 const piValue = calculatePi(10000000); 
 
 
-const piRounded = piValue.toFixed(journalNumber);
+const piRounded = piValue.toFixed(journalNumber); 
 
 const server = http.createServer((req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
