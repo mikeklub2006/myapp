@@ -1,9 +1,9 @@
 const http = require('http');
 
 
-const fullName = 'Кунец Никита Андреевич';   
+const fullName = 'Клубович Михаил Сергеевич';   
 const group = 'Группа 401';             
-const journalNumber = 10;                    
+const journalNumber = 8;                    
 
 
 function calculatePi(iterations) {
