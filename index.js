@@ -1,45 +1,106 @@
 const http = require('http');
+const EventEmitter = require('events');
+const logger = require('./logger');
 
+class AppServer extends EventEmitter {
+  constructor() {
+    super();
+    this.server = null;
+  }
 
-const fullName = 'Клубович Михаил Сергеевич';   
-const group = 'Группа 401';             
-const journalNumber = 8;                    
+  start(port) {
+    this.server = http.createServer((req, res) => {
+      this.emit('request:received', { url: req.url, method: req.method });
 
+      res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
 
-function calculatePi(iterations) {
-    let insideCircle = 0;
-    for (let i = 0; i < iterations; i++) {
-        const x = Math.random();
-        const y = Math.random();
-        if (x * x + y * y <= 1) {
-            insideCircle++;
-        }
-    }
-    return (insideCircle / iterations) * 4;
+      if (req.method === 'GET' && req.url.startsWith('/order/')) {
+        const orderId = req.url.split('/')[2];
+        orderHandler.processOrder(orderId);
+        res.end(`Hello from Event-Driven Server! Заказ #${orderId} принят в обработку`);
+        return;
+      }
+
+      res.end('Hello from Event-Driven Server!');
+    });
+
+    this.server.listen(port, () => this.emit('server:started', port));
+  }
+
+  stop() {
+    if (!this.server) return;
+    this.server.close(() => this.emit('server:stopped'));
+    this.server.closeAllConnections();
+  }
 }
 
+class OrderHandler extends EventEmitter {
+  processOrder(orderId) {
+    this.emit('order:start', orderId);
 
-const piValue = calculatePi(10000000); 
+    setTimeout(() => {
+      this.emit('order:processing', orderId, 'Идёт обработка...');
 
+      setTimeout(() => {
+        const sum = Math.floor(Math.random() * 901) + 100;
+        this.emit('order:complete', orderId, sum);
+      }, 2000);
+    }, 2000);
+  }
+}
 
-const piRounded = piValue.toFixed(journalNumber); 
+class UserTracker extends EventEmitter {
+  trackAction(userId, action, metadata) {
+    this.emit('user:action', {
+      userId: userId,
+      action: action,
+      timestamp: new Date().toISOString(),
+      metadata: metadata,
+      id: Math.random().toString(36).substr(2, 9)
+    });
+  }
+}
 
-const server = http.createServer((req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-    res.write('<h1>Информация о студенте</h1>');
-    res.write(`<p><strong>ФИО:</strong> ${fullName}</p>`);
-    res.write(`<p><strong>Группа:</strong> ${group}</p>`);
-    res.write(`<p><strong>Номер по журналу:</strong> ${journalNumber}</p>`);
-    res.write(`<p><strong>Число Пи (${journalNumber} знаков):</strong> ${piRounded}</p>`);
-    res.write(`<p><strong>Точное значение Пи:</strong> 3.141592653589793</p>`);
-    res.end();
+// ряд Нилаканты, 7 знаков после запятой
+function calcPI() {
+  let pi = 3;
+  let sign = 1;
+
+  for (let i = 2; i <= 100000; i += 2) {
+    pi += sign * 4 / (i * (i + 1) * (i + 2));
+    sign = -sign;
+  }
+
+  return (Math.trunc(pi * 1e7) / 1e7).toFixed(7);
+}
+
+const app = new AppServer();
+const orderHandler = new OrderHandler();
+const tracker = new UserTracker();
+
+app.on('server:started', (port) => console.log(`Сервер запущен на порту ${port}`));
+app.on('request:received', (data) => console.log(`Получен запрос: ${data.method} ${data.url}`));
+app.on('server:stopped', () => console.log('Сервер остановлен'));
+
+logger.setupLogger(app);
+
+orderHandler.on('order:start', (id) => console.log(`[order:start] Заказ #${id} начат`));
+orderHandler.on('order:processing', (id, text) => console.log(`[order:processing] Заказ #${id}: ${text}`));
+orderHandler.on('order:complete', (id, sum) => {
+  console.log(`Заказ #${id} завершён на сумму ${sum} руб. PI = ${calcPI()}`);
 });
 
-const PORT = 3000;
-server.listen(PORT, () => {
-    console.log(`Сервер запущен на http://localhost:${PORT}`);
-    console.log(`ФИО: ${fullName}`);
-    console.log(`Группа: ${group}`);
-    console.log(`Номер по журналу: ${journalNumber}`);
-    console.log(`Число Пи (${journalNumber} знаков): ${piRounded}`);
+tracker.on('user:action', (e) => {
+  console.log(`Пользователь ${e.userId} совершил действие "${e.action}"`);
+  console.log(`   Время: ${e.timestamp}`);
+  console.log(`   ID события: ${e.id}`);
+  console.log(`   Доп. данные: ${JSON.stringify(e.metadata)}`);
 });
+
+app.start(3000);
+
+tracker.trackAction(1, 'login', { ip: '192.168.0.10', browser: 'Chrome' });
+tracker.trackAction(2, 'purchase', { item: 'Клавиатура', price: 4500 });
+tracker.trackAction(3, 'logout', { session: '18m', device: 'mobile' });
+
+setTimeout(() => app.stop(), 10000);
