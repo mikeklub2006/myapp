@@ -1,0 +1,4 @@
+node_modules/
+.env
+pool-errors.log
+api/logs/
