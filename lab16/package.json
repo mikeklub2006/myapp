@@ -1,0 +1,28 @@
+{
+  "name": "lab16",
+  "version": "1.0.0",
+  "description": "Лабораторная работа 16: сервер на Express.js",
+  "main": "task1.js",
+  "scripts": {
+    "task1": "node task1.js",
+    "task2": "node task2.js",
+    "task3": "node task3.js",
+    "task4": "node task4.js",
+    "task5": "node task5/server.js"
+  },
+  "author": "Клубович Михаил",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "compression": "^1.8.2",
+    "csv-parse": "^7.0.3",
+    "express": "^4.22.3",
+    "express-rate-limit": "^7.5.1",
+    "joi": "^18.3.2",
+    "joi-to-swagger": "^6.2.0",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.5.0",
+    "swagger-ui-express": "^5.0.1"
+  }
+}
