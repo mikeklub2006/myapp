@@ -1,0 +1,7 @@
+node_modules/
+/output.*
+/report.*
+/result.json
+/samples/
+task5/dist/
+*.exe
