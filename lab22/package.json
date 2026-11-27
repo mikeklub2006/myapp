@@ -1,0 +1,27 @@
+{
+  "name": "lab22",
+  "version": "1.0.0",
+  "description": "Лабораторная работа 22: MySQL в Node.js",
+  "main": "api/server.js",
+  "scripts": {
+    "start": "node api/server.js",
+    "migrate": "node api/migrations/migrate.js",
+    "migrate:rollback": "node api/migrations/migrate.js rollback",
+    "seed": "node api/seed.js",
+    "connect": "node mysql-connect.js",
+    "crud": "node mysql-crud.js",
+    "errors": "node mysql-errors.js",
+    "dao": "node mysql-dao.js"
+  },
+  "keywords": [],
+  "author": "Клубович Михаил",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@koa/router": "^12.0.2",
+    "dotenv": "^16.4.5",
+    "koa": "^2.16.4",
+    "koa-bodyparser": "^4.4.1",
+    "mysql2": "^3.24.6"
+  }
+}
