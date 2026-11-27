@@ -1,0 +1,21 @@
+{
+  "name": "lab15",
+  "version": "1.0.0",
+  "description": "Лабораторная работа 15: сервер на Koa.js",
+  "main": "task1.js",
+  "scripts": {
+    "task1": "node task1.js",
+    "task2": "node task2.js",
+    "task3": "node task3.js",
+    "task4": "node task4.js",
+    "task5": "node task5.js"
+  },
+  "author": "Клубович Михаил",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@koa/router": "^13.1.1",
+    "koa": "^2.16.4",
+    "koa-bodyparser": "^4.4.1"
+  }
+}
