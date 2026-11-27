@@ -1,0 +1,19 @@
+Lab 21, group 401, student Klubovich Mikhail, variant 8
+Streams in Node.js: Readable, Writable, Duplex, Transform
+pipe() connects a readable stream to a writable stream
+pipeline() connects streams and closes all of them on error
+backpressure appears when the consumer is slower than the producer
+highWaterMark sets the size of the internal buffer
+objectMode allows streams to work with js objects
+for await can be used to read any readable stream
+fs.createReadStream reads a file in chunks of 64 KB by default
+fs.createWriteStream writes data to a file in chunks
+the drain event means that the buffer is empty again
+the finish event is emitted after end() and all writes
+the end event is emitted when there is no more data to read
+the close event is emitted when the resource is released
+the error event must always be handled
+Transform streams change data on the way from input to output
+zlib.createGzip() is an example of a built-in transform stream
+process.stdin and process.stdout are streams too
+HTTP request and response objects are streams as well
