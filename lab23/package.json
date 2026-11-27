@@ -1,0 +1,28 @@
+{
+  "name": "lab23",
+  "version": "1.0.0",
+  "description": "Лабораторная работа 23: работа с MongoDB средствами Node.js",
+  "main": "task5/app.js",
+  "scripts": {
+    "mongo": "node mongo-server.js",
+    "connect": "node mongodb-connect.js",
+    "crud": "node mongodb-crud.js",
+    "advanced": "node mongodb-advanced.js",
+    "transactions": "node mongodb-transactions.js",
+    "start": "node task5/app.js",
+    "ws-client": "node task5/ws-client.js"
+  },
+  "author": "Клубович Михаил",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@koa/router": "^12.0.2",
+    "ajv": "^8.20.0",
+    "dotenv": "^16.6.1",
+    "koa": "^2.16.4",
+    "koa-bodyparser": "^4.4.1",
+    "mongodb": "^6.22.0",
+    "mongodb-memory-server": "^10.4.3",
+    "ws": "^8.23.0"
+  }
+}
