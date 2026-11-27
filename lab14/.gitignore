@@ -1,0 +1,8 @@
+student_*.txt
+data_*.txt 
+processed_*.txt 
+report_*.json 
+sync_report_*.txt 
+project_*/ 
+source_*/ 
+backup_*/ 
