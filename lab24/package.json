@@ -1,0 +1,29 @@
+{
+  "name": "lab24",
+  "version": "1.0.0",
+  "description": "ЛР24: REST API для пользователей на MongoDB и Koa.js",
+  "main": "task1/app.js",
+  "scripts": {
+    "start:task1": "node task1/app.js",
+    "start:task2": "node task2/app.js",
+    "start:task3": "node task3/app.js",
+    "start:task4": "node task4/app.js"
+  },
+  "author": "Клубович Михаил",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@koa/cors": "^5.0.0",
+    "@koa/router": "^12.0.2",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.6.1",
+    "joi": "^17.13.9",
+    "jsonwebtoken": "^9.0.3",
+    "koa": "^2.16.4",
+    "koa-bodyparser": "^4.4.1",
+    "koa-helmet": "^7.1.0",
+    "mongodb": "^6.22.0",
+    "mongodb-memory-server": "^10.4.3"
+  },
+  "private": true
+}
