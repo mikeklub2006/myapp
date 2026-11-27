@@ -1,0 +1,19 @@
+{
+  "name": "lab20",
+  "version": "1.0.0",
+  "description": "Лабораторная работа 20: маршрутизация с использованием объекта HTTP Request",
+  "main": "http-server.js",
+  "scripts": {
+    "task1": "node http-server.js",
+    "task2": "node headers-server.js",
+    "task3": "node body-server.js",
+    "task4": "node router-server.js",
+    "task5": "node http-advanced.js"
+  },
+  "author": "Клубович Михаил",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "selfsigned": "2.4.1"
+  }
+}
