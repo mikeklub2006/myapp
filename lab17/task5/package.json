@@ -1,0 +1,37 @@
+{
+  "name": "my-cli",
+  "version": "1.0.0",
+  "description": "ЛР17, задание 5: CLI-приложение с архитектурой, тестами и упаковкой",
+  "bin": {
+    "my-cli": "bin/my-cli.js"
+  },
+  "scripts": {
+    "start": "node bin/my-cli.js",
+    "test": "jest",
+    "build:exe": "npx @yao-pkg/pkg . --targets node22-win-x64 --output dist/my-cli.exe",
+    "build:linux": "npx @yao-pkg/pkg . --targets node22-linux-x64 --output dist/my-cli-linux"
+  },
+  "pkg": {
+    "scripts": [
+      "commands/*.js",
+      "services/*.js",
+      "utils/*.js"
+    ]
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": ["<rootDir>/tests/**/*.test.js"],
+    "testTimeout": 30000
+  },
+  "author": "Клубович Михаил",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^12.1.0",
+    "ora": "^5.4.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}

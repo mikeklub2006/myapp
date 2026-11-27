@@ -1,0 +1,21 @@
+{
+  "name": "lab17",
+  "version": "1.0.0",
+  "description": "Лабораторная работа 17: CLI-приложения на Node.js",
+  "scripts": {
+    "task1": "node task1.js",
+    "task2": "node task2.js",
+    "task3": "node task3.js init",
+    "task4": "node task4.js"
+  },
+  "author": "Клубович Михаил",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "cli-progress": "^3.12.0",
+    "commander": "^12.1.0",
+    "inquirer": "^8.2.7",
+    "ora": "^5.4.1"
+  }
+}
